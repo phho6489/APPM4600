@@ -25,18 +25,21 @@ Copyright (C) 2025  Adrianna M. Gillman
 
 # import libraries
 import numpy as np
+import math
         
 def driver():
 #f = lambda x: (x-2)**3
 #fp = lambda x: 3*(x-2)**2
 #p0 = 1.2
 
-  f = lambda x: (x-2)*(x-5)*np.exp(x)
-  fp = lambda x: (x-2)*(x-5)*np.exp(x)+(2*x-7)*np.exp(x) 
-  p0 = 1.2
+  f = lambda x: math.erf(x/(2*(math.sqrt(beta)))) - (3/7)
+  fp = lambda x: (1/(math.sqrt(math.pi)*math.sqrt(beta)))*math.exp(-(x**2)/(2*math.sqrt(beta)))
+  #p0 = 0.01
+  p0 = 1
 
   Nmax = 100
-  tol = 1.e-14
+  tol = 1e-13
+  beta = 0.715392
 
   (p,pstar,info,it) = newton(f,fp,p0,tol, Nmax)
   print('the approximate root is', '%16.16e' % pstar)
